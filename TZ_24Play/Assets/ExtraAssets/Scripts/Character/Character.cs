@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     AnimatorComponent animatorComponent;
     RagdollComponent ragdollComponent;
     MoveComponent moveComponent;
-    DeathCheckComponent deathCheckComponent;
+    MeshColliderHandler meshColliderHandler;
 
     CharacterBlocksManager pickedBlocksManager;
 
@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
         meshTransform = transform.Find("Stickman").GetComponent<Transform>();
         blocksHolder = transform.Find("BlocksHolder").transform;
 
-        deathCheckComponent = meshTransform.GetComponent<DeathCheckComponent>();
+        meshColliderHandler = meshTransform.GetComponent<MeshColliderHandler>();
 
         boostEvent = new BoostEvent();
     }
@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
         animatorComponent = new AnimatorComponent(meshTransform, collisionEvent);
         ragdollComponent = new RagdollComponent(meshTransform, gameStateEvents);
         moveComponent = new MoveComponent(_transform, moveSpeed, boostSpeed, gameStateEvents, boostEvent);
-        deathCheckComponent.Init(gameStateEvents);
+        meshColliderHandler.Init(gameStateEvents, collisionEvent);
 
         pickedBlocksManager = new CharacterBlocksManager(pickedBlockPrefab, blocksHolder, collisionEvent);
 

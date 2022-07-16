@@ -19,9 +19,9 @@ public class CharacterBlock : MonoBehaviour
         raycastLength = _transform.localScale.x / 2 + 0.05f;
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        CollisionCheck();
+        canCollide = true;
     }
 
     public void Init(Transform parent, ICollisionEvent collisionEvent)
@@ -30,9 +30,9 @@ public class CharacterBlock : MonoBehaviour
         this.collisionEvent = collisionEvent;
     }
 
-    public void OnSpawn()
+    private void FixedUpdate()
     {
-        canCollide = true;
+        CollisionCheck();
     }
 
     private void CollisionCheck()

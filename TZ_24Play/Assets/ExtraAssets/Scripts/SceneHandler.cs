@@ -7,11 +7,10 @@ public class SceneHandler : MonoBehaviour
     [SerializeField] private Character character;
     [SerializeField] private GameObject pickedBlockPrefab;
     [SerializeField] private GameObject particlePrefab;
-    [SerializeField] private GameObject platformPrefab;
-    [SerializeField] private GameObject[] wallPrefabs;
+    [SerializeField] private GameObject[] platformVariants;
 
     ParticleManager particleManager;
-    SceneBuider sceneBuider;
+    TrackBuilder sceneBuider;
 
     IGameStateEvents gameStateEvents;
     ICollisionEvent collisionEvent;
@@ -22,14 +21,14 @@ public class SceneHandler : MonoBehaviour
         collisionEvent = new CollisionEvent();
 
         particleManager = new ParticleManager(particlePrefab, character, collisionEvent);
-        sceneBuider = new SceneBuider(collisionEvent, platformPrefab, wallPrefabs);
+        sceneBuider = new TrackBuilder(collisionEvent, platformVariants);
     }
 
     private void Start()
     {
         character.Init(pickedBlockPrefab, gameStateEvents, collisionEvent);
 
-        gameStateEvents.Invoke_GameStart();
+        gameStateEvents.Invoke_GameStart(); // Test
     }
 
     private void OnDisable()

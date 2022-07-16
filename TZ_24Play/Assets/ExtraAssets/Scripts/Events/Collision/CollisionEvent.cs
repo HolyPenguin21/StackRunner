@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class CollisionEvent : ICollisionEvent
 {
+    event ICollisionEvent.OnWallPass onWallPass;
     event ICollisionEvent.OnWallCollision onWallCollision;
     event ICollisionEvent.OnPickUp onPickUp;
+
+    public void Add_OnWallPass_Listener(ICollisionEvent.OnWallPass method)
+    {
+        onWallPass += method;
+    }
+
+    public void Invoke_OnWallPass()
+    {
+        onWallPass?.Invoke();
+    }
 
     public void Add_OnWallCollision_Listener(ICollisionEvent.OnWallCollision method)
     {
