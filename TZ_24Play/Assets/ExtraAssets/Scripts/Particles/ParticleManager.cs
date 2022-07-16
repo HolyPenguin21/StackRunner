@@ -16,12 +16,12 @@ public class ParticleManager
         this.particlePrefab = particlePrefab;
         this.character = character;
 
-        PreparePool(10, collisionEvent);
+        PreparePool(10);
 
         collisionEvent.Add_OnPickUp_Listener(SpawnObject);
     }
 
-    private void PreparePool(int count, ICollisionEvent collisionEvent)
+    private void PreparePool(int count)
     {
         particlesPool = new GameObject[count];
         particlesHolder = new GameObject("--Pool_Particles").transform;

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveComponent
 {
-    Transform transform;
+    Transform _transform;
 
     float baseSpeed = 7.5f;
     float currentSpeed;
@@ -13,9 +11,9 @@ public class MoveComponent
     bool canMove = false;
     bool isBoosted = false;
 
-    public MoveComponent(Transform transform, float baseSpeed, float boostSpeed, IGameStateEvents gameStateEvents, IBoostEvent boostEvent)
+    public MoveComponent(Transform transform, float baseSpeed, float boostSpeed, IGameStateEvents gameStateEvents, IBoostEvent boostEvent, IInputEvent inputEvent)
     {
-        this.transform = transform;
+        _transform = transform;
 
         this.baseSpeed = baseSpeed;
         this.boostSpeed = boostSpeed;
@@ -25,25 +23,38 @@ public class MoveComponent
         gameStateEvents.Add_GameEndListener(Disallow_Movement);
         gameStateEvents.Add_GameRestartListener(Disallow_Movement);
 
+        inputEvent.Add_OnInput_Listener(SideMove);
+
         boostEvent.Add_OnBoost_Listener(Boost);
     }
 
-    public void Allow_Movement()
+    private void Allow_Movement()
     {
         canMove = true;
     }
 
-    public void Disallow_Movement()
+    private void Disallow_Movement()
     {
         canMove = false;
     }
 
-    public void Move()
+    public void ForwardMove()
     {
         if (!canMove) return;
         if (isBoosted) Reduce_BoostEffect();
 
-        transform.position += transform.forward * Time.deltaTime * currentSpeed;
+        _transform.position += _transform.forward * Time.deltaTime * currentSpeed;
+    }
+
+    private void SideMove(float delta)
+    {
+        if (!canMove) return;
+
+        Vector3 curPos = _transform.position;
+        curPos.x += delta / 300;
+        curPos.x = Mathf.Clamp(curPos.x, -2.0f, 2.0f);
+
+        _transform.position = curPos;
     }
 
     private void Boost()

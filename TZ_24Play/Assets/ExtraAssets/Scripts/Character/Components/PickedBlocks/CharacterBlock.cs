@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterBlock : MonoBehaviour
@@ -53,7 +52,7 @@ public class CharacterBlock : MonoBehaviour
 
         collisionEvent.Invoke_OnWallCollision();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(10f);
 
         _transform.parent = parent;
         gameObject.SetActive(false);

@@ -52,7 +52,7 @@ public class TrackBuilder
         platform_sc.transform.localPosition = startPos;
         platform_sc.gameObject.SetActive(true);
 
-        platform_sc.Move(endPos);
+        platform_sc.MoveOrder(endPos);
 
         currentPlatformCount++;
     }

@@ -22,7 +22,7 @@ public class MeshColliderHandler : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (!collider.CompareTag("wallPass")) return;
-        Debug.Log("asdasd");
+
         collisionEvent.Invoke_OnWallPass();
     }
 }

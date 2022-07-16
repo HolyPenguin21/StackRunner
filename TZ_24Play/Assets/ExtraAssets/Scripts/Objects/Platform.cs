@@ -9,13 +9,20 @@ public class Platform : MonoBehaviour
     Transform poolHolder;
     Transform camTransform;
 
+    PositionRandomizer[] pickableObjects;
+
+    private void Awake()
+    {
+        pickableObjects = GetComponentsInChildren<PositionRandomizer>();
+    }
+
     public void Init(Transform camTransform, Transform poolHolder)
     {
         this.camTransform = camTransform;
         this.poolHolder = poolHolder;
     }
 
-    public void Move(Vector3 moveToPosition)
+    public void MoveOrder(Vector3 moveToPosition)
     {
         StartCoroutine(Movement(moveToPosition));
     }
@@ -53,13 +60,23 @@ public class Platform : MonoBehaviour
     private void DisableDistanceCheck()
     {
         float dist = camTransform.position.z - transform.position.z;
-        if (dist > 30)
-            Disable();
+        if (dist > 45)
+            DisablePlatform();
     }
 
-    private void Disable()
+    private void DisablePlatform()
     {
         transform.parent = poolHolder;
+        EnablePickables();
+
         gameObject.SetActive(false);
+    }
+
+    private void EnablePickables()
+    {
+        foreach (PositionRandomizer obj in pickableObjects)
+        {
+            obj.gameObject.SetActive(true);
+        }
     }
 }

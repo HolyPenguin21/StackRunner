@@ -15,7 +15,6 @@ public class GameStateEvents : IGameStateEvents
 
     public void Invoke_GameStart()
     {
-        Debug.Log("onGameStart");
         onGameStart?.Invoke();
     }
 
@@ -26,7 +25,6 @@ public class GameStateEvents : IGameStateEvents
 
     public void Invoke_GameEnd()
     {
-        Debug.Log("onGameEnd");
         onGameEnd?.Invoke();
     }
 
@@ -37,7 +35,6 @@ public class GameStateEvents : IGameStateEvents
 
     public void Invoke_GameRestart()
     {
-        Debug.Log("onGameRestart");
         onGameRestart?.Invoke();
     }
 

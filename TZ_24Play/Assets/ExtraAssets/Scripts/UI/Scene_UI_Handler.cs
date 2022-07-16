@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scene_UI_Handler : MonoBehaviour
+public class Scene_UI_Handler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    UI_StartGame startGame;
+    UI_EndGame endGame;
 
-    // Update is called once per frame
-    void Update()
+    public Scene_UI_Handler(IGameStateEvents gameStateEvents)
     {
-        
+        startGame = new UI_StartGame(gameStateEvents);
+        endGame = new UI_EndGame(gameStateEvents);
     }
 }

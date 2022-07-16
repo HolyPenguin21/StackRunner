@@ -7,18 +7,20 @@ public class UI_StartGame : UI_Element
 {
     Canvas startGame_canvas;
 
-    public UI_StartGame()
+    public UI_StartGame(IGameStateEvents gameStateEvents)
     {
         startGame_canvas = Get_SceneObject(startGame_canvas, "StartGame");
+
+        gameStateEvents.Add_GameStartListener(Hide);
     }
 
     public override void Hide()
     {
-        throw new System.NotImplementedException();
+        startGame_canvas.gameObject.SetActive(false);
     }
 
     public override void Show()
     {
-        throw new System.NotImplementedException();
+        startGame_canvas.gameObject.SetActive(true);
     }
 }

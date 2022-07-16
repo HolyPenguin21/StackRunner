@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class Character : MonoBehaviour
 {
@@ -36,17 +33,19 @@ public class Character : MonoBehaviour
         boostEvent = new BoostEvent();
     }
 
-    public void Init(GameObject pickedBlockPrefab, IGameStateEvents gameStateEvents, ICollisionEvent collisionEvent)
+    public void Init(GameObject pickedBlockPrefab, IGameStateEvents gameStateEvents, ICollisionEvent collisionEvent, IInputEvent inputEvent)
     {
         this.gameStateEvents = gameStateEvents;
         this.collisionEvent = collisionEvent;
 
         animatorComponent = new AnimatorComponent(meshTransform, collisionEvent);
         ragdollComponent = new RagdollComponent(meshTransform, gameStateEvents);
-        moveComponent = new MoveComponent(_transform, moveSpeed, boostSpeed, gameStateEvents, boostEvent);
+        moveComponent = new MoveComponent(_transform, moveSpeed, boostSpeed, gameStateEvents, boostEvent, inputEvent);
         meshColliderHandler.Init(gameStateEvents, collisionEvent);
 
         pickedBlocksManager = new CharacterBlocksManager(pickedBlockPrefab, blocksHolder, collisionEvent);
+
+        gameStateEvents.Add_GameRestartListener(Restart);
 
         collisionEvent.Add_OnWallCollision_Listener(Remove_Block);
         collisionEvent.Add_OnPickUp_Listener(Add_Block);
@@ -54,9 +53,18 @@ public class Character : MonoBehaviour
         Add_Block();
     }
 
+    private void Restart()
+    {
+        meshTransform.ResetRotation();
+        meshTransform.localPosition = Vector3.zero;
+        transform.position = Vector3.zero;
+
+        Add_Block();
+    }
+
     private void FixedUpdate()
     {
-        moveComponent.Move();
+        moveComponent.ForwardMove();
     }
 
     private void Add_Block()
@@ -85,7 +93,5 @@ public class Character : MonoBehaviour
     private void OnDisable()
     {
         boostEvent.Remove_Listeners();
-
-        DOTween.Kill(meshTransform);
     }
 }
