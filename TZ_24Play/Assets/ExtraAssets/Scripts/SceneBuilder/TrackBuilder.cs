@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrackBuilder
 {
     const float posIterator = 30f;
-    int currentPlatformCount = 1;
+    int currentPlatformCount = 3;
 
     Transform cameraTransform;
 

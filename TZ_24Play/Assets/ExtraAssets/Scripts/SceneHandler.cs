@@ -36,7 +36,7 @@ public class SceneHandler : MonoBehaviour
         collisionEvent = new CollisionEvent();
         inputEvent = new InputEvent();
 
-        scene_UI_Handler = new Scene_UI_Handler(gameStateEvents);
+        scene_UI_Handler = new Scene_UI_Handler(gameStateEvents, collisionEvent);
         shakeCamera = new ShakeCamera(Camera.main.transform, collisionEvent, gameStateEvents, inputType);
         warpEffect = new WarpEffect(warpEffect_particle, gameStateEvents);
 

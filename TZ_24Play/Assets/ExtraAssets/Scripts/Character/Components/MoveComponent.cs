@@ -20,7 +20,7 @@ public class MoveComponent
         this.baseSpeed = baseSpeed;
         this.boostSpeed = boostSpeed;
         currentSpeed = baseSpeed;
-        sideMoveOffset = Screen.width / 3;
+        sideMoveOffset = Screen.width / 2;
 
         gameStateEvents.Add_GameStartListener(Allow_Movement);
         gameStateEvents.Add_GameEndListener(Disallow_Movement);
@@ -62,7 +62,7 @@ public class MoveComponent
 
     private void Boost()
     {
-        currentSpeed = boostSpeed;
+        currentSpeed += boostSpeed;
         isBoosted = true;
     }
 
