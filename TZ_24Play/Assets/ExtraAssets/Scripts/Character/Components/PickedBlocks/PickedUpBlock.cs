@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CharacterBlock : MonoBehaviour
+public class PickedUpBlock : MonoBehaviour
 {
     Transform _transform;
     Transform parent;
@@ -11,6 +11,7 @@ public class CharacterBlock : MonoBehaviour
     RaycastHit hit;
 
     ICollisionEvent collisionEvent;
+    IBoostEvent boostEvent;
 
     private void Awake()
     {
@@ -23,10 +24,12 @@ public class CharacterBlock : MonoBehaviour
         canCollide = true;
     }
 
-    public void Init(Transform parent, ICollisionEvent collisionEvent)
+    public void Init(Transform parent, ICollisionEvent collisionEvent, IBoostEvent boostEvent)
     {
         this.parent = parent;
+
         this.collisionEvent = collisionEvent;
+        this.boostEvent = boostEvent;
     }
 
     private void FixedUpdate()
@@ -60,10 +63,15 @@ public class CharacterBlock : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (!collider.CompareTag("pickableBlock")) return;
+        if (collider.CompareTag("pickableBlock"))
+        {
+            collisionEvent.Invoke_OnPickUp();
 
-        collisionEvent.Invoke_OnPickUp();
-
-        collider.gameObject.SetActive(false);
+            collider.gameObject.SetActive(false);
+        }
+        else if (collider.CompareTag("boost"))
+        {
+            boostEvent.Invoke_OnBoost();
+        }
     }
 }

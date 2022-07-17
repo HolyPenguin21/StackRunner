@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     MoveComponent moveComponent;
     MeshColliderHandler meshColliderHandler;
 
-    CharacterBlocksManager pickedBlocksManager;
+    PickedUpBlocks_Handler pickedBlocksManager;
 
     IBoostEvent boostEvent;
     ICollisionEvent collisionEvent;
@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
         moveComponent = new MoveComponent(_transform, moveSpeed, boostSpeed, gameStateEvents, boostEvent, inputEvent);
         meshColliderHandler.Init(gameStateEvents, collisionEvent);
 
-        pickedBlocksManager = new CharacterBlocksManager(pickedBlockPrefab, blocksHolder, collisionEvent);
+        pickedBlocksManager = new PickedUpBlocks_Handler(pickedBlockPrefab, blocksHolder, collisionEvent, boostEvent);
 
         gameStateEvents.Add_GameRestartListener(Restart);
 

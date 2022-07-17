@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBlocksManager
+public class PickedUpBlocks_Handler
 {
     GameObject prefab;
 
-    CharacterBlock[] blocksPool;
+    PickedUpBlock[] blocksPool;
     Transform blocksHolder;
 
-    public CharacterBlocksManager(GameObject prefab, Transform blocksHolder, ICollisionEvent collisionEvent)
+    public PickedUpBlocks_Handler(GameObject prefab, Transform blocksHolder, ICollisionEvent collisionEvent, IBoostEvent boostEvent)
     {
         this.prefab = prefab;
         this.blocksHolder = blocksHolder;
 
-        PreparePool(20, collisionEvent);
+        PreparePool(20, collisionEvent, boostEvent);
     }
 
-    private void PreparePool(int count, ICollisionEvent collisionEvent)
+    private void PreparePool(int count, ICollisionEvent collisionEvent, IBoostEvent boostEvent)
     {
-        blocksPool = new CharacterBlock[count];
+        blocksPool = new PickedUpBlock[count];
 
         for (int i = 0; i < blocksPool.Length; i++)
         {
             GameObject block_obj = MonoBehaviour.Instantiate(prefab, blocksHolder);
             block_obj.SetActive(false);
 
-            CharacterBlock block_sc = block_obj.GetComponent<CharacterBlock>();
-            block_sc.Init(blocksHolder, collisionEvent);
+            PickedUpBlock block_sc = block_obj.GetComponent<PickedUpBlock>();
+            block_sc.Init(blocksHolder, collisionEvent, boostEvent);
 
             blocksPool[i] = block_sc;
         }
@@ -44,7 +44,7 @@ public class CharacterBlocksManager
 
     private GameObject Get_FreeBlock()
     {
-        foreach (CharacterBlock block in blocksPool)
+        foreach (PickedUpBlock block in blocksPool)
         {
             if (!block.gameObject.activeInHierarchy)
                 return block.gameObject;

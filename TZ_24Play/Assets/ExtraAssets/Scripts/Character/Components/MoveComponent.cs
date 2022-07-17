@@ -6,7 +6,9 @@ public class MoveComponent
 
     float baseSpeed = 7.5f;
     float currentSpeed;
-    float boostSpeed = 10f;
+    float boostSpeed = 20f;
+
+    float sideMoveOffset = 300f;
 
     bool canMove = false;
     bool isBoosted = false;
@@ -18,6 +20,7 @@ public class MoveComponent
         this.baseSpeed = baseSpeed;
         this.boostSpeed = boostSpeed;
         currentSpeed = baseSpeed;
+        sideMoveOffset = Screen.width / 3;
 
         gameStateEvents.Add_GameStartListener(Allow_Movement);
         gameStateEvents.Add_GameEndListener(Disallow_Movement);
@@ -51,7 +54,7 @@ public class MoveComponent
         if (!canMove) return;
 
         Vector3 curPos = _transform.position;
-        curPos.x += delta / 300;
+        curPos.x += delta / sideMoveOffset;
         curPos.x = Mathf.Clamp(curPos.x, -2.0f, 2.0f);
 
         _transform.position = curPos;

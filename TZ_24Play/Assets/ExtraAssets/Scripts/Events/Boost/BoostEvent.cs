@@ -13,7 +13,6 @@ public class BoostEvent : IBoostEvent
 
     public void Invoke_OnBoost()
     {
-        Debug.Log("onBoost");
         onBoost?.Invoke();
     }
 
