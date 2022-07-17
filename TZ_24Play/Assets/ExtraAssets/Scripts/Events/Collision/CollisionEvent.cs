@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class CollisionEvent : ICollisionEvent
 {
@@ -40,6 +37,7 @@ public class CollisionEvent : ICollisionEvent
 
     public void Remove_Listeners()
     {
+        onWallPass = null;
         onWallCollision = null;
         onPickUp = null;
     }

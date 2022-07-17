@@ -26,8 +26,7 @@ public class Scene_Input
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (!gameStarted)
-                gameStateEvents.Invoke_GameStart();
+            if (!gameStarted) gameStateEvents.Invoke_GameStart();
 
             start_InputPos = Input.mousePosition;
         }
@@ -37,7 +36,6 @@ public class Scene_Input
             current_InputPos = Input.mousePosition;
 
             float delta = current_InputPos.x - start_InputPos.x;
-
             inputEvent.Invoke_OnInput(delta);
         }
     }

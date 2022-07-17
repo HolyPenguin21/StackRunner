@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrackBuilder
@@ -17,7 +15,7 @@ public class TrackBuilder
     public TrackBuilder(ICollisionEvent collisionEvent, GameObject[] platformVariants)
     {
         cameraTransform = Camera.main.transform;
-        poolHolder = new GameObject("--PlatformsPool").transform;
+        poolHolder = new GameObject("--Platforms_Pool").transform;
 
         this.platformVariants = platformVariants;
 

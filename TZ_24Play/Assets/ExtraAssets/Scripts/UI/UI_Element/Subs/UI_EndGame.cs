@@ -13,8 +13,6 @@ public class UI_EndGame : UI_Element
 
         gameStateEvents.Add_GameEndListener(Show);
         gameStateEvents.Add_GameRestartListener(Hide);
-
-        Hide();
     }
 
     public override void Hide()

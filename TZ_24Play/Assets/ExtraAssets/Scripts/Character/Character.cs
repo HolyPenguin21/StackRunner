@@ -12,12 +12,10 @@ public class Character : MonoBehaviour
     AnimatorComponent animatorComponent;
     RagdollComponent ragdollComponent;
     MoveComponent moveComponent;
-    MeshColliderHandler meshColliderHandler;
-
+    MeshCollider_Handler meshColliderHandler;
     PickedUpBlocks_Handler pickedBlocksManager;
 
     IBoostEvent boostEvent;
-    ICollisionEvent collisionEvent;
     IGameStateEvents gameStateEvents;
 
     int blockCount = 0;
@@ -25,10 +23,10 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
-        meshTransform = transform.Find("Stickman").GetComponent<Transform>();
+        meshTransform = transform.Find("Stickman").transform;
         blocksHolder = transform.Find("BlocksHolder").transform;
 
-        meshColliderHandler = meshTransform.GetComponent<MeshColliderHandler>();
+        meshColliderHandler = meshTransform.GetComponent<MeshCollider_Handler>();
 
         boostEvent = new BoostEvent();
     }
@@ -36,7 +34,6 @@ public class Character : MonoBehaviour
     public void Init(GameObject pickedBlockPrefab, IGameStateEvents gameStateEvents, ICollisionEvent collisionEvent, IInputEvent inputEvent)
     {
         this.gameStateEvents = gameStateEvents;
-        this.collisionEvent = collisionEvent;
 
         animatorComponent = new AnimatorComponent(meshTransform, collisionEvent);
         ragdollComponent = new RagdollComponent(meshTransform, gameStateEvents);
@@ -45,19 +42,8 @@ public class Character : MonoBehaviour
 
         pickedBlocksManager = new PickedUpBlocks_Handler(pickedBlockPrefab, blocksHolder, collisionEvent, boostEvent);
 
-        gameStateEvents.Add_GameRestartListener(Restart);
-
         collisionEvent.Add_OnWallCollision_Listener(Remove_Block);
         collisionEvent.Add_OnPickUp_Listener(Add_Block);
-
-        Add_Block();
-    }
-
-    private void Restart()
-    {
-        meshTransform.ResetRotation();
-        meshTransform.localPosition = Vector3.zero;
-        transform.position = Vector3.zero;
 
         Add_Block();
     }
@@ -78,11 +64,7 @@ public class Character : MonoBehaviour
     {
         blockCount--;
 
-        if (blockCount <= 0)
-        {
-            gameStateEvents.Invoke_GameEnd();
-            return;
-        }
+        if (blockCount <= 0) gameStateEvents.Invoke_GameEnd();
     }
 
     public Vector3 Get_CurrentMeshPosition()

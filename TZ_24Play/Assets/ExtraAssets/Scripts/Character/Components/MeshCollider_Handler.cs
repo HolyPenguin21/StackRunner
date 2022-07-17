@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class MeshColliderHandler : MonoBehaviour
+public class MeshCollider_Handler : MonoBehaviour
 {
     IGameStateEvents gameStateEvents;
     ICollisionEvent collisionEvent;

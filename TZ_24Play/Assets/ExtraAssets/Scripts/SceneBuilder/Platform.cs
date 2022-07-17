@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] private float bottomMoveTime = 1f;
-    [SerializeField] private float topMoveTime = 0.25f;
+    const float hideDistance = 45f;
+
+    [SerializeField] private float bottomMoveTimer = 1f;
+    [SerializeField] private float topMoveTimer = 0.25f;
 
     Transform poolHolder;
     Transform camTransform;
@@ -31,10 +33,10 @@ public class Platform : MonoBehaviour
     {
         Vector3 endPos = moveToPosition;
         endPos.y = -10;
-        yield return PartialMove(bottomMoveTime, endPos);
+        yield return PartialMove(bottomMoveTimer, endPos);
 
         endPos = moveToPosition;
-        yield return PartialMove(topMoveTime, endPos);
+        yield return PartialMove(topMoveTimer, endPos);
     }
 
     private IEnumerator PartialMove(float timer, Vector3 endPos)
@@ -60,7 +62,7 @@ public class Platform : MonoBehaviour
     private void DisableDistanceCheck()
     {
         float dist = camTransform.position.z - transform.position.z;
-        if (dist > 45)
+        if (dist > hideDistance)
             DisablePlatform();
     }
 

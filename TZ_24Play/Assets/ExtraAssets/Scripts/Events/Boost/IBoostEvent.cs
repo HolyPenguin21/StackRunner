@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿
 public interface IBoostEvent
 {
     delegate void OnBoost();

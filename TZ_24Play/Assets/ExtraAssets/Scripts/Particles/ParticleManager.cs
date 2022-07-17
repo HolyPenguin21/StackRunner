@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleManager
@@ -51,7 +49,7 @@ public class ParticleManager
                 return particle;
         }
 
-        Debug.LogError("Missing particle prefabs, add more into pool");
+        Debug.LogError("Missing Particle prefabs, add more into pool");
         return null;
     }
 }

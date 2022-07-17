@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickedUpBlocks_Handler
 {
-    GameObject prefab;
+    GameObject pickedBlockPrefab;
 
     PickedUpBlock[] blocksPool;
     Transform blocksHolder;
 
-    public PickedUpBlocks_Handler(GameObject prefab, Transform blocksHolder, ICollisionEvent collisionEvent, IBoostEvent boostEvent)
+    public PickedUpBlocks_Handler(GameObject pickedBlockPrefab, Transform blocksHolder, ICollisionEvent collisionEvent, IBoostEvent boostEvent)
     {
-        this.prefab = prefab;
+        this.pickedBlockPrefab = pickedBlockPrefab;
         this.blocksHolder = blocksHolder;
 
         PreparePool(20, collisionEvent, boostEvent);
@@ -23,7 +21,7 @@ public class PickedUpBlocks_Handler
 
         for (int i = 0; i < blocksPool.Length; i++)
         {
-            GameObject block_obj = MonoBehaviour.Instantiate(prefab, blocksHolder);
+            GameObject block_obj = MonoBehaviour.Instantiate(pickedBlockPrefab, blocksHolder);
             block_obj.SetActive(false);
 
             PickedUpBlock block_sc = block_obj.GetComponent<PickedUpBlock>();

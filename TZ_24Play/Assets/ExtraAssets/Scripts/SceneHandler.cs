@@ -5,6 +5,8 @@ public class SceneHandler : MonoBehaviour
 {
     SceneSettings.InputType inputType;
     SceneSettings sceneSettings;
+    Scene_Input sceneInput;
+    Scene_UI_Handler scene_UI_Handler;
 
     [SerializeField] private Character character;
     [SerializeField] private GameObject pickedBlockPrefab;
@@ -13,14 +15,11 @@ public class SceneHandler : MonoBehaviour
     [SerializeField] private Canvas scorePrefab;
     [SerializeField] private GameObject[] platformVariants;
 
-    Scene_UI_Handler scene_UI_Handler;
     ShakeCamera shakeCamera;
     WarpEffect warpEffect;
-
     ParticleManager particleManager;
     ScoreTextManager scoreTextManager;
     TrackBuilder trackBuilder;
-    Scene_Input sceneInput;
 
     IGameStateEvents gameStateEvents;
     ICollisionEvent collisionEvent;
@@ -36,14 +35,15 @@ public class SceneHandler : MonoBehaviour
         collisionEvent = new CollisionEvent();
         inputEvent = new InputEvent();
 
+        sceneInput = new Scene_Input(gameStateEvents, inputEvent);
         scene_UI_Handler = new Scene_UI_Handler(gameStateEvents, collisionEvent);
+
         shakeCamera = new ShakeCamera(Camera.main.transform, collisionEvent, gameStateEvents, inputType);
         warpEffect = new WarpEffect(warpEffect_particle, gameStateEvents);
 
         particleManager = new ParticleManager(particlePrefab, character, collisionEvent);
         scoreTextManager = new ScoreTextManager(scorePrefab, character, collisionEvent);
         trackBuilder = new TrackBuilder(collisionEvent, platformVariants);
-        sceneInput = new Scene_Input(gameStateEvents, inputEvent);
 
         gameStateEvents.Add_GameRestartListener(Restart);
     }

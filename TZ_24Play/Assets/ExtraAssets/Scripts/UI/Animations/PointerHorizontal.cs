@@ -1,10 +1,9 @@
-
 using UnityEngine;
 using DG.Tweening;
 
 public class PointerHorizontal : MonoBehaviour
 {
-    private void Start()
+    private void OnEnable()
     {
         transform.DOLocalMoveX(transform.position.x + 100, 1f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
     }

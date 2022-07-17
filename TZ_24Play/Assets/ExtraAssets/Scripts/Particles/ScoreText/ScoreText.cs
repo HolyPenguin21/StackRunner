@@ -1,10 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour
 {
+    [SerializeField] private float timer = 5f;
+    [SerializeField] private float speed = 5f;
+
     RectTransform rectTransform;
     Vector3 up = Vector3.up;
 
@@ -13,12 +14,6 @@ public class ScoreText : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    private void Update()
-    {
-        rectTransform.transform.position += up * Time.deltaTime * 5f;
-    }
-
-    [SerializeField] private float timer = 5f;
     private void OnEnable()
     {
         StartCoroutine(Disable());
@@ -26,7 +21,21 @@ public class ScoreText : MonoBehaviour
 
     private IEnumerator Disable()
     {
-        yield return new WaitForSeconds(timer);
+        float curTime = 0;
+
+        while (curTime < timer)
+        {
+            MoveUp();
+
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+
         gameObject.SetActive(false);
+    }
+
+    private void MoveUp()
+    {
+        rectTransform.transform.position += up * Time.deltaTime * speed;
     }
 }

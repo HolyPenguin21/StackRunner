@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using DG.Tweening;
 
 public class ShakeCamera
@@ -21,8 +20,7 @@ public class ShakeCamera
     {
         transform.DOShakePosition(0.75f, 1f, 1, 90, false, true);
 
-        if (isMobile)
-            Handheld.Vibrate();
+        if (isMobile) Handheld.Vibrate();
     }
 
     private void ClearDotween()

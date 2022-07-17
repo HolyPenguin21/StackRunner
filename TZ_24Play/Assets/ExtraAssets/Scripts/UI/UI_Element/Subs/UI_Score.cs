@@ -14,7 +14,7 @@ public class UI_Score : UI_Element
         score_canvas = Get_SceneObject(score_canvas, "Score");
         score_text = Get_SceneObject(score_text, "ScoreValue");
 
-        collisionEvent.Add_OnPickUp_Listener(Animate);
+        collisionEvent.Add_OnPickUp_Listener(Animate_OnPickUp);
         collisionEvent.Add_OnPickUp_Listener(AddScore);
 
         gameStateEvents.Add_GameStartListener(ResetText);
@@ -33,7 +33,7 @@ public class UI_Score : UI_Element
         score_canvas.gameObject.SetActive(true);
     }
 
-    private void Animate()
+    private void Animate_OnPickUp()
     {
         score_text.transform.DOShakeScale(0.5f, 1, 10, 90, true);
     }
