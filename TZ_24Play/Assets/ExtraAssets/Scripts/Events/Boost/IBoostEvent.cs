@@ -1,4 +1,4 @@
-﻿
+
 public interface IBoostEvent
 {
     delegate void OnBoost();

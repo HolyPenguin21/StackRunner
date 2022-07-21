@@ -20,7 +20,7 @@ public class Scene_Input
         gameStateEvents.Add_GameEndListener(EndGame);
     }
 
-    public void SceneInput()
+    public void Input_Update()
     {
         if (gameEnded) return;
 

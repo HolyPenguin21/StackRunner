@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, ICharacter
 {
     [SerializeField] private float moveSpeed = 7.5f;
     [SerializeField] private float boostSpeed = 10f;
@@ -37,10 +37,9 @@ public class Character : MonoBehaviour
 
         animatorComponent = new AnimatorComponent(meshTransform, collisionEvent);
         ragdollComponent = new RagdollComponent(meshTransform, gameStateEvents);
+        pickedBlocksManager = new PickedUpBlocks_Handler(pickedBlockPrefab, blocksHolder, collisionEvent, boostEvent);
         moveComponent = new MoveComponent(_transform, moveSpeed, boostSpeed, gameStateEvents, boostEvent, inputEvent);
         meshColliderHandler.Init(gameStateEvents, collisionEvent);
-
-        pickedBlocksManager = new PickedUpBlocks_Handler(pickedBlockPrefab, blocksHolder, collisionEvent, boostEvent);
 
         collisionEvent.Add_OnWallCollision_Listener(Remove_Block);
         collisionEvent.Add_OnPickUp_Listener(Add_Block);
@@ -56,7 +55,7 @@ public class Character : MonoBehaviour
     private void Add_Block()
     {
         pickedBlocksManager.SpawnBlock(blockCount);
-        meshTransform.localPosition += Vector3.up;
+        meshTransform.localPosition += Vector3.up * 1.5f;
         blockCount++;
     }
 

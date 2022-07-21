@@ -9,6 +9,7 @@ public class MoveComponent
     float boostSpeed = 20f;
 
     float sideMoveOffset = 300f;
+    float sideMoveSpeed = 15f;
 
     bool canMove = false;
     bool isBoosted = false;
@@ -53,11 +54,11 @@ public class MoveComponent
     {
         if (!canMove) return;
 
-        Vector3 curPos = _transform.position;
-        curPos.x += delta / sideMoveOffset;
-        curPos.x = Mathf.Clamp(curPos.x, -2.0f, 2.0f);
+        Vector3 nextPos = _transform.position;
+        nextPos.x += delta / sideMoveOffset;
+        nextPos.x = Mathf.Clamp(nextPos.x, -2.0f, 2.0f);
 
-        _transform.position = curPos;
+        _transform.position = Vector3.Lerp(_transform.position, nextPos, Time.deltaTime * sideMoveSpeed);
     }
 
     private void Boost()

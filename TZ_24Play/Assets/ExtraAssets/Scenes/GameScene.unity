@@ -1069,7 +1069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2076399478334519671, guid: d9ce45b6decb1724584923dfb9761356, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Character
       objectReference: {fileID: 0}
     - target: {fileID: 7589476872154892378, guid: d9ce45b6decb1724584923dfb9761356, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -1133,7 +1133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857248499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1182,7 +1182,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 3
+  m_Time: 2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1230,7 +1230,7 @@ TrailRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 5
     numCapVertices: 0
     alignment: 0
     textureMode: 0
@@ -1712,10 +1712,10 @@ RectTransform:
   m_Father: {fileID: 1115899334}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -16.244, y: 658}
-  m_SizeDelta: {x: 532.185, y: 207.217}
+  m_AnchorMin: {x: 0.238, y: 0.7882322}
+  m_AnchorMax: {x: 0.73129886, y: 0.89752096}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1304462066
 MonoBehaviour:
@@ -2105,7 +2105,7 @@ MonoBehaviour:
   pickedBlockPrefab: {fileID: 3481367610352654943, guid: 87fb94be01a58f14abb19385a2fd3018, type: 3}
   particlePrefab: {fileID: 253324237633408118, guid: b6c0b1506426c6842aef80fad4e5bb5e, type: 3}
   warpEffect_particle: {fileID: 2063713401}
-  scorePrefab: {fileID: 8826951187986414743, guid: e3f3042afd3e879458c1e9b8535296e0, type: 3}
+  scorePrefab: {fileID: 8826951187986414746, guid: e3f3042afd3e879458c1e9b8535296e0, type: 3}
   platformVariants:
   - {fileID: 5177721316858294175, guid: 503f63829c80da149aaed1df1cbb8eb2, type: 3}
   - {fileID: 4710619303735100665, guid: cb13011e90127db4083131c076263a32, type: 3}
